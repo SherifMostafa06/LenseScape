@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    login.html — Login & Registration Page
+    (Moved from index.html so the root URL can serve the public home.)
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LensSpace — Sign In</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+</head>
+
+<body id="page-login">
+
+  <!-- PUBLIC NAVIGATION BAR -->
+  <nav class="public-nav" aria-label="Site navigation">
+    <a href="index.html" class="public-nav-brand">
+      <div class="brand-mark">LS</div>
+      LensSpace
+    </a>
+    <div class="public-nav-links">
+      <a href="index.html">Browse Studios</a>
+      <a href="about.html">About Us</a>
+    </div>
+    <div class="public-nav-actions">
+      <div class="toggle-wrapper">
+        <span class="dark-mode-label">Dark</span>
+        <button class="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+      </div>
+      <a href="index.html" class="nav-login-btn">Browse Studios</a>
+    </div>
+  </nav>
+
+  <main class="form-page">
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <div class="logo-mark">LS</div>
+        <h1>LensSpace</h1>
+        <p>Professional Photoshoot Studio Reservations</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Sign In</button>
+        <button class="auth-tab"        data-tab="register">Create Account</button>
+      </div>
+
+      <!-- PANEL 1: LOGIN -->
+      <div id="panel-login" class="auth-panel active">
+        <form id="login-form" novalidate>
+
+          <div class="form-group">
+            <label class="form-label" for="login-email">
+              Email Address <span class="required">*</span>
+            </label>
+            <div class="input-icon-wrapper">
+              <span class="input-prefix">@</span>
+              <input type="email" id="login-email" name="email" class="form-input"
+                     placeholder="you@example.com" autocomplete="email" />
+            </div>
+            <span class="field-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">
+              Password <span class="required">*</span>
+            </label>
+            <div class="password-wrapper">
+              <input type="password" id="login-password" name="password" class="form-input"
+                     placeholder="Enter your password" autocomplete="current-password" />
+              <button type="button" class="password-toggle" aria-label="Toggle password visibility">Show</button>
+            </div>
+            <span class="field-error"></span>
+          </div>
+
+          <div class="demo-box">
+            <strong>Demo Accounts</strong><br/>
+            User &nbsp;: <code>user@studio.com</code> / <code>User1234!</code><br/>
+            Owner: <code>owner@studio.com</code> / <code>Owner123!</code><br/>
+            Admin: <code>admin@studio.com</code> / <code>Admin123!</code>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+        </form>
+      </div>
+
+      <!-- PANEL 2: REGISTER -->
+      <div id="panel-register" class="auth-panel">
+        <form id="register-form" novalidate>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-name">
+              Full Name <span class="required">*</span>
+            </label>
+            <div class="input-icon-wrapper">
+              <span class="input-prefix">ID</span>
+              <input type="text" id="reg-name" name="name" class="form-input"
+                     placeholder="Your full name" autocomplete="name" />
+            </div>
+            <span class="field-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">
+              Email Address <span class="required">*</span>
+            </label>
+            <div class="input-icon-wrapper">
+              <span class="input-prefix">@</span>
+              <input type="email" id="reg-email" name="email" class="form-input"
+                     placeholder="you@example.com" autocomplete="email" />
+            </div>
+            <span class="field-error"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="reg-password">
+                Password <span class="required">*</span>
+              </label>
+              <div class="password-wrapper">
+                <input type="password" id="reg-password" name="password" class="form-input"
+                       placeholder="Min. 8 characters" autocomplete="new-password" />
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">Show</button>
+              </div>
+              <span class="field-error"></span>
+              <span class="field-hint">Uppercase, lowercase and number required</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reg-confirm">
+                Confirm Password <span class="required">*</span>
+              </label>
+              <div class="password-wrapper">
+                <input type="password" id="reg-confirm" name="confirmPassword" class="form-input"
+                       placeholder="Repeat password" autocomplete="new-password" />
+                <button type="button" class="password-toggle" aria-label="Toggle password visibility">Show</button>
+              </div>
+              <span class="field-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              Register as <span class="required">*</span>
+            </label>
+            <div class="radio-group">
+              <div class="radio-card">
+                <input type="radio" id="role-user" name="role" value="user" checked />
+                <label for="role-user">
+                  <span class="radio-icon">USR</span>
+                  Regular User
+                </label>
+              </div>
+              <div class="radio-card">
+                <input type="radio" id="role-owner" name="role" value="owner" />
+                <label for="role-owner">
+                  <span class="radio-icon">OWN</span>
+                  Studio Owner
+                </label>
+              </div>
+            </div>
+            <span class="field-error" id="role-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block mt-md">Create Account</button>
+
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2025 LensSpace &mdash;
+    <a href="index.html">Browse Studios</a> &mdash;
+    <a href="about.html">About Us</a>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
