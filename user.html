@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    user.html — Regular User Dashboard
+    CHANGES: All emojis removed. Nav icons replaced with text abbreviations.
+    Studio card image area shows text label instead of camera emoji.
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LensSpace — Browse Studios</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+</head>
+
+<body id="page-user">
+
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-name">LensSpace</span>
+        <span class="brand-sub">Studio Reservations</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <span class="nav-section-label">Navigation</span>
+        <a href="#studios"  class="nav-link active">
+          <span class="nav-icon" aria-hidden="true">&#9632;</span> Browse Studios
+        </a>
+        <a href="#bookings" class="nav-link">
+          <span class="nav-icon" aria-hidden="true">&#9776;</span> My Bookings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <strong id="sidebar-user-name">Loading...</strong>
+          <span id="sidebar-user-role">User</span>
+        </div>
+        <div class="toggle-wrapper">
+          <span class="dark-mode-label">Dark</span>
+          <button class="dark-mode-toggle" aria-label="Toggle dark mode"></button>
+        </div>
+        <button id="btn-logout" class="btn btn-ghost" style="width:100%; justify-content:flex-start; padding-left:0;">
+          Log Out
+        </button>
+      </div>
+    </aside>
+
+
+    <!-- Main content -->
+    <div class="main-content">
+
+      <header class="topbar">
+        <button id="menu-toggle" class="btn btn-ghost btn-sm" aria-label="Toggle menu">Menu</button>
+        <h2 class="topbar-title" id="topbar-title">Browse Studios</h2>
+        <div class="topbar-actions">
+          <span style="font-size:0.85rem; color:var(--clr-text-muted);">
+            Welcome, <strong id="topbar-user-name"></strong>
+          </span>
+        </div>
+      </header>
+
+
+      <main class="page-content">
+
+        <!-- SECTION: Studios -->
+        <section id="studios" class="section">
+          <div class="section-header">
+            <div>
+              <h2>Available Studios</h2>
+              <p style="margin:0;">Find and book the perfect space for your shoot.</p>
+            </div>
+          </div>
+
+          <!-- Filter bar -->
+          <div class="filter-bar">
+            <div class="filter-group" style="flex: 1; min-width: 200px;">
+              <label for="filter-search">Search</label>
+              <div class="search-bar" style="max-width: 100%;">
+                <span class="search-icon">Srch</span>
+                <input type="text" id="filter-search" class="form-input" placeholder="Search by name or feature..." />
+              </div>
+            </div>
+            <div class="filter-group">
+              <label for="filter-zone">Zone</label>
+              <select id="filter-zone" class="form-select" style="min-width: 160px;">
+                <option value="all">All Zones</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Studio cards grid -->
+          <div id="studios-grid" class="studio-grid">
+            <div class="empty-state" style="grid-column:1/-1;">
+              <div class="empty-state-icon">LS</div>
+              <h3>Loading studios...</h3>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- SECTION: My Bookings -->
+        <section id="bookings" class="section">
+          <div class="section-header">
+            <h2>My Bookings</h2>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="My Bookings">
+              <thead>
+                <tr>
+                  <th>Studio</th>
+                  <th>Date</th>
+                  <th>Start Time</th>
+                  <th>Duration</th>
+                  <th>Total Cost</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="my-bookings-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+
+  <!-- BOOKING MODAL -->
+  <div id="modal-booking" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-booking-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-booking-title">
+          Book Studio: <span id="booking-studio-name">—</span>
+        </h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="booking-form" novalidate>
+          <input type="hidden" id="booking-studio-id" name="studioId" />
+
+          <!-- Date -->
+          <div class="form-group">
+            <label class="form-label" for="booking-date">
+              Booking Date <span class="required">*</span>
+            </label>
+            <input type="date" id="booking-date" name="date" class="form-input" />
+            <span class="field-error"></span>
+          </div>
+
+          <!-- Time + Hours -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="booking-time">
+                Start Time <span class="required">*</span>
+              </label>
+              <input type="time" id="booking-time" name="startTime" class="form-input" />
+              <span class="field-error"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="booking-hours">
+                Duration (hours) <span class="required">*</span>
+              </label>
+              <div class="number-input-wrapper">
+                <button type="button" id="hours-down" class="number-btn" aria-label="Decrease hours">&minus;</button>
+                <input type="number" id="booking-hours" name="hours" class="form-input" value="1" min="1" max="12" />
+                <button type="button" id="hours-up"   class="number-btn" aria-label="Increase hours">+</button>
+              </div>
+              <span class="field-error"></span>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="form-group">
+            <label class="form-label" for="booking-notes">Special Notes</label>
+            <textarea id="booking-notes" name="notes" class="form-textarea" placeholder="Any special requirements for your shoot..." rows="3"></textarea>
+          </div>
+
+          <!-- Cost preview -->
+          <div class="card" style="background: var(--clr-accent-light); border-color: var(--clr-accent);">
+            <div class="card-body" style="padding: var(--sp-md);">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.88rem; color:var(--clr-text-muted);">
+                  Per hour: <strong id="booking-price-per-hour">—</strong>
+                </span>
+                <span style="font-size:1.1rem; font-weight:700; color:var(--clr-accent);">
+                  Total: <span id="booking-total-cost">—</span>
+                </span>
+              </div>
+              <p style="font-size:0.75rem; margin-top:4px; margin-bottom:0; color:var(--clr-text-muted);">
+                Booking is subject to owner approval.
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost modal-close">Cancel</button>
+        <button type="submit" form="booking-form" class="btn btn-primary">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="js/storage.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = getCurrentUser();
+      const el = document.getElementById('topbar-user-name');
+      if (el && user) el.textContent = user.name;
+    });
+  </script>
+
+</body>
+</html>

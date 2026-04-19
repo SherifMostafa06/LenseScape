@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    index.html — Public Home / Studio Browser
+    Visible to ALL visitors without logging in.
+    Clicking "Book Now" checks for an active session:
+      - Not logged in  → redirected to login.html
+      - Logged in      → already redirected to their dashboard on load
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LensSpace — Photoshoot Studio Reservations</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+</head>
+
+<body id="page-home">
+
+  <!-- PUBLIC NAV -->
+  <nav class="public-nav" aria-label="Site navigation">
+    <a href="index.html" class="public-nav-brand">
+      <div class="brand-mark">LS</div>
+      LensSpace
+    </a>
+    <div class="public-nav-links">
+      <a href="index.html" class="active">Browse Studios</a>
+      <a href="about.html">About Us</a>
+    </div>
+    <div class="public-nav-actions">
+      <div class="toggle-wrapper">
+        <span class="dark-mode-label">Dark</span>
+        <button class="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+      </div>
+      <a href="login.html" class="nav-login-btn">Sign In</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <div class="home-hero-content">
+      <div class="home-hero-badge">Cairo's Studio Marketplace</div>
+      <h1>Book Your Perfect<br/>Photoshoot Studio</h1>
+      <p>
+        Browse professional studios across Cairo — natural light spaces, LED rigs,
+        rooftops &amp; more. Create a free account to reserve your slot instantly.
+      </p>
+      <div class="home-hero-actions">
+        <a href="login.html" class="btn btn-primary">Get Started — It's Free</a>
+        <a href="about.html" class="btn btn-ghost">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO BROWSING -->
+  <main class="home-main">
+    <div class="home-content">
+
+      <div class="section-header">
+        <div>
+          <h2>Available Studios</h2>
+          <p style="margin:0;">Browse freely — sign in when you're ready to book.</p>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-group" style="flex:1;min-width:200px;">
+          <label for="filter-search">Search</label>
+          <div class="search-bar" style="max-width:100%;">
+            <span class="search-icon">Srch</span>
+            <input type="text" id="filter-search" class="form-input" placeholder="Search by name or feature..." />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label for="filter-zone">Zone</label>
+          <select id="filter-zone" class="form-select" style="min-width:160px;">
+            <option value="all">All Zones</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="studios-grid" class="studio-grid">
+        <div class="empty-state" style="grid-column:1/-1;">
+          <div class="empty-state-icon">LS</div>
+          <h3>Loading studios...</h3>
+        </div>
+      </div>
+
+      <div class="home-cta-bar">
+        <p>Ready to book? Create a free account to reserve any studio instantly.</p>
+        <a href="login.html" class="btn btn-primary">Sign In or Register</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2025 LensSpace &mdash;
+    <a href="about.html">About Us</a> &mdash;
+    <a href="login.html">Sign In</a>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
