@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    owner.html — Studio Owner Dashboard
+    CHANGES: All emojis removed throughout.
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LensSpace — Owner Dashboard</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+</head>
+
+<body id="page-owner">
+
+  <div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-name">LensSpace</span>
+        <span class="brand-sub">Owner Dashboard</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Owner navigation">
+        <span class="nav-section-label">Manage</span>
+        <a href="#studios"  class="nav-link active"><span class="nav-icon">&#9632;</span> My Studios</a>
+        <a href="#bookings" class="nav-link"><span class="nav-icon">&#9776;</span> Booking Requests</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <strong id="sidebar-user-name">Loading...</strong>
+          <span id="sidebar-user-role">Owner</span>
+        </div>
+        <div class="toggle-wrapper">
+          <span class="dark-mode-label">Dark</span>
+          <button class="dark-mode-toggle" aria-label="Toggle dark mode"></button>
+        </div>
+        <button id="btn-logout" class="btn btn-ghost" style="width:100%; justify-content:flex-start; padding-left:0;">
+          Log Out
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="topbar">
+        <button id="menu-toggle" class="btn btn-ghost btn-sm">Menu</button>
+        <h2 class="topbar-title" id="topbar-title">Owner Dashboard</h2>
+        <div class="topbar-actions">
+          <span style="font-size:0.85rem; color:var(--clr-text-muted);">
+            Welcome, <strong id="topbar-user-name"></strong>
+          </span>
+        </div>
+      </header>
+
+      <main class="page-content">
+
+        <div class="stats-grid" id="stats-grid"></div>
+
+        <!-- My Studios -->
+        <section id="studios" class="section">
+          <div class="section-header">
+            <div>
+              <h2>My Studios</h2>
+              <p style="margin:0;">Add, edit, or remove your studio listings.</p>
+            </div>
+            <button class="btn btn-primary" id="btn-add-studio">+ Add Studio</button>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="My Studios">
+              <thead>
+                <tr>
+                  <th>Studio Name</th>
+                  <th>Zone</th>
+                  <th>Price / hr</th>
+                  <th>Capacity</th>
+                  <th>Availability</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studios-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Booking Requests -->
+        <section id="bookings" class="section">
+          <div class="section-header">
+            <h2>Booking Requests</h2>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="Booking Requests">
+              <thead>
+                <tr>
+                  <th>Studio</th>
+                  <th>Client</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Hours</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookings-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+
+  <!-- ADD / EDIT STUDIO MODAL -->
+  <div id="modal-studio" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-studio-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-studio-title">Add Studio</h3>
+        <button class="modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="studio-form" novalidate>
+          <input type="hidden" id="studio-id" name="studioId" />
+
+          <div class="form-group">
+            <label class="form-label" for="studio-name">Studio Name <span class="required">*</span></label>
+            <input type="text" id="studio-name" name="name" class="form-input" placeholder="e.g. Golden Hour Studio" />
+            <span class="field-error"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="studio-zone">Zone <span class="required">*</span></label>
+              <select id="studio-zone" name="zone" class="form-select">
+                <option value="">Select zone...</option>
+                <option value="downtown">Downtown</option>
+                <option value="westside">Westside</option>
+                <option value="northside">Northside</option>
+                <option value="eastside">Eastside</option>
+                <option value="suburbs">Suburbs</option>
+              </select>
+              <span class="field-error"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="studio-price">Price / Hour (EGP) <span class="required">*</span></label>
+              <input type="number" id="studio-price" name="price" class="form-input" placeholder="e.g. 150" min="1" />
+              <span class="field-error"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="studio-capacity">Capacity <span class="required">*</span></label>
+              <input type="number" id="studio-capacity" name="capacity" class="form-input" placeholder="e.g. 8" min="1" max="100" />
+              <span class="field-error"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Availability</label>
+              <label class="switch-wrapper" style="margin-top:10px;">
+                <div class="switch">
+                  <input type="checkbox" id="studio-available" name="available" checked />
+                  <span class="switch-slider"></span>
+                </div>
+                <span class="switch-label" id="available-label">Available for booking</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="studio-description">Description <span class="required">*</span></label>
+            <textarea id="studio-description" name="description" class="form-textarea" placeholder="Describe your studio..." rows="3"></textarea>
+            <span class="field-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="studio-features">Features <span style="font-weight:400; text-transform:none; letter-spacing:0;">(comma-separated)</span></label>
+            <input type="text" id="studio-features" name="features" class="form-input" placeholder="e.g. Natural Light, Backdrop, Dressing Room" />
+            <span class="field-hint">These appear as tags on the studio listing.</span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost modal-close">Cancel</button>
+        <button type="submit" form="studio-form" class="btn btn-primary" id="studio-submit-btn">Save Studio</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/owner.js"></script>
+
+</body>
+</html>
