@@ -1,8 +1,8 @@
-// server.js — LensSpace Backend Entry Point
+// server.js ΓÇö LensSpace Backend Entry Point
 require('dotenv').config();
 const express      = require('express');
 const session      = require('express-session');
-const { MongoStore } = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 const cors         = require('cors');
 const path         = require('path');
 const fs           = require('fs');
@@ -15,26 +15,26 @@ const adminRoutes  = require('./backend/routes/adminRoutes');
 const errorHandler = require('./backend/middleware/errorHandler');
 const AppError     = require('./backend/utils/AppError');
 
-// ── Connect to MongoDB Atlas ──────────────────────────────────────
+// ΓöÇΓöÇ Connect to MongoDB Atlas ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 connectDB();
 
-// ── Ensure uploads/ directory exists ─────────────────────────────
+// ΓöÇΓöÇ Ensure uploads/ directory exists ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 const uploadsDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
 
 const app = express();
 
-// ── CORS ──────────────────────────────────────────────────────────
+// ΓöÇΓöÇ CORS ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 app.use(cors({
   origin: true,
   credentials: true,   // Allow cookies/sessions across origins
 }));
 
-// ── Body Parsers ──────────────────────────────────────────────────
+// ΓöÇΓöÇ Body Parsers ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ── Session (stored in MongoDB via connect-mongo) ─────────────────
+// ΓöÇΓöÇ Session (stored in MongoDB via connect-mongo) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 app.use(session({
   secret: process.env.SESSION_SECRET || 'lensspace_dev_secret',
   resave: false,
@@ -51,24 +51,24 @@ app.use(session({
   },
 }));
 
-// ── Static Files ──────────────────────────────────────────────────
+// ΓöÇΓöÇ Static Files ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 // Serve the frontend (photostudio/) at root
 app.use(express.static(path.join(__dirname, 'photostudio')));
 // Serve uploaded images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// ── API Routes ────────────────────────────────────────────────────
+// ΓöÇΓöÇ API Routes ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 app.use('/api/auth',    authRoutes);
 app.use('/api/studios', studioRoutes);
 app.use('/api/bookings',bookingRoutes);
 app.use('/api/admin',   adminRoutes);
 
-// ── Health Check ──────────────────────────────────────────────────
+// ΓöÇΓöÇ Health Check ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 app.get('/api/health', (req, res) =>
-  res.json({ success: true, message: 'LensSpace API is running 🚀' })
+  res.json({ success: true, message: 'LensSpace API is running ≡ƒÜÇ' })
 );
 
-// ── Catch-all: serve frontend SPA or 404 for unknown API routes ──
+// ΓöÇΓöÇ Catch-all: serve frontend SPA or 404 for unknown API routes ΓöÇΓöÇ
 app.use((req, res, next) => {
   if (req.path.startsWith('/api/')) {
     return next(new AppError(`Route ${req.originalUrl} not found`, 404));
@@ -77,13 +77,13 @@ app.use((req, res, next) => {
 });
 
 
-// ── Global Error Handler ──────────────────────────────────────────
+// ΓöÇΓöÇ Global Error Handler ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 app.use(errorHandler);
 
-// ── Start Server ──────────────────────────────────────────────────
+// ΓöÇΓöÇ Start Server ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`\n🚀 LensSpace server running on http://localhost:${PORT}`);
-  console.log(`📁 Serving frontend from: photostudio/`);
-  console.log(`🗂️  API available at:      http://localhost:${PORT}/api\n`);
+  console.log(`\n≡ƒÜÇ LensSpace server running on http://localhost:${PORT}`);
+  console.log(`≡ƒôü Serving frontend from: photostudio/`);
+  console.log(`≡ƒùé∩╕Å  API available at:      http://localhost:${PORT}/api\n`);
 });

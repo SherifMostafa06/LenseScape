@@ -1,4 +1,4 @@
-# LensSpace — Setup Guide
+﻿# LensSpace ΓÇö Setup Guide
 
 ## Prerequisites
 - Node.js 18+
@@ -8,9 +8,9 @@
 
 ### 1. MongoDB Atlas
 1. Create a free cluster at https://cloud.mongodb.com
-2. Create a database user (Database Access → Add New User)
-3. Whitelist your IP (Network Access → Add IP → Allow from anywhere: `0.0.0.0/0`)
-4. Get your connection string (Connect → Connect your application → Copy the URI)
+2. Create a database user (Database Access ΓåÆ Add New User)
+3. Whitelist your IP (Network Access ΓåÆ Add IP ΓåÆ Allow from anywhere: `0.0.0.0/0`)
+4. Get your connection string (Connect ΓåÆ Connect your application ΓåÆ Copy the URI)
 
 ### 2. Configure Environment Variables
 Edit the `.env` file in the root folder:
@@ -18,11 +18,11 @@ Edit the `.env` file in the root folder:
 MONGO_URI=mongodb+srv://yourUser:yourPassword@cluster0.xxxxx.mongodb.net/lensspace?retryWrites=true&w=majority
 SESSION_SECRET=any_long_random_string_here
 PORT=3000
-EMAIL_USER=yourgmail@gmail.com     ← optional, for booking emails
-EMAIL_PASS=your_app_password       ← Gmail App Password (not your real password)
+EMAIL_USER=yourgmail@gmail.com     ΓåÉ optional, for booking emails
+EMAIL_PASS=your_app_password       ΓåÉ Gmail App Password (not your real password)
 ```
 
-> **Gmail App Password**: Google Account → Security → 2-Step Verification → App passwords
+> **Gmail App Password**: Google Account ΓåÆ Security ΓåÆ 2-Step Verification ΓåÆ App passwords
 
 ### 3. Install Dependencies
 ```bash
@@ -44,7 +44,7 @@ Visit: **http://localhost:3000**
 ## Default Admin Account
 There is no seeded admin account. To create one:
 1. Register normally at http://localhost:3000/login.html
-2. In MongoDB Atlas → Browse Collections → `users` collection
+2. In MongoDB Atlas ΓåÆ Browse Collections ΓåÆ `users` collection
 3. Find your user and change `role` from `"user"` to `"admin"`
 4. Log out and log back in
 
@@ -53,34 +53,34 @@ There is no seeded admin account. To create one:
 ## Project Structure
 ```
 photoshoot v3/
-├── photostudio/          ← Frontend (HTML, CSS, JS)
-│   ├── index.html        ← Public home page
-│   ├── login.html        ← Sign in / Register
-│   ├── user.html         ← User dashboard
-│   ├── owner.html        ← Studio owner dashboard
-│   ├── admin.html        ← Admin panel
-│   ├── about.html        ← About page
-│   ├── css/              ← Stylesheets
-│   └── js/               ← Client-side scripts
-│       ├── api.js         ← API client (fetch wrapper)
-│       ├── ui-helpers.js  ← Shared UI functions
-│       ├── i18n.js        ← Arabic/English localization
-│       ├── auth-page.js   ← Login/register page
-│       ├── home-page.js   ← Home page
-│       ├── user-page.js   ← User dashboard
-│       ├── owner-page.js  ← Owner dashboard
-│       └── admin-page.js  ← Admin dashboard
-├── backend/              ← Backend (Node.js/Express)
-│   ├── config/           ← DB & email config
-│   ├── models/           ← Mongoose models (User, Studio, Booking)
-│   ├── controllers/      ← Route handlers
-│   ├── routes/           ← Express routers
-│   ├── middleware/        ← Auth, error handler, upload, asyncWrapper
-│   └── utils/            ← AppError, sendEmail
-├── uploads/              ← Studio image uploads (auto-created)
-├── server.js             ← Entry point
-├── .env                  ← Environment variables (DO NOT commit)
-└── package.json
+Γö£ΓöÇΓöÇ photostudio/          ΓåÉ Frontend (HTML, CSS, JS)
+Γöé   Γö£ΓöÇΓöÇ index.html        ΓåÉ Public home page
+Γöé   Γö£ΓöÇΓöÇ login.html        ΓåÉ Sign in / Register
+Γöé   Γö£ΓöÇΓöÇ user.html         ΓåÉ User dashboard
+Γöé   Γö£ΓöÇΓöÇ owner.html        ΓåÉ Studio owner dashboard
+Γöé   Γö£ΓöÇΓöÇ admin.html        ΓåÉ Admin panel
+Γöé   Γö£ΓöÇΓöÇ about.html        ΓåÉ About page
+Γöé   Γö£ΓöÇΓöÇ css/              ΓåÉ Stylesheets
+Γöé   ΓööΓöÇΓöÇ js/               ΓåÉ Client-side scripts
+Γöé       Γö£ΓöÇΓöÇ api.js         ΓåÉ API client (fetch wrapper)
+Γöé       Γö£ΓöÇΓöÇ ui-helpers.js  ΓåÉ Shared UI functions
+Γöé       Γö£ΓöÇΓöÇ i18n.js        ΓåÉ Arabic/English localization
+Γöé       Γö£ΓöÇΓöÇ auth-page.js   ΓåÉ Login/register page
+Γöé       Γö£ΓöÇΓöÇ home-page.js   ΓåÉ Home page
+Γöé       Γö£ΓöÇΓöÇ user-page.js   ΓåÉ User dashboard
+Γöé       Γö£ΓöÇΓöÇ owner-page.js  ΓåÉ Owner dashboard
+Γöé       ΓööΓöÇΓöÇ admin-page.js  ΓåÉ Admin dashboard
+Γö£ΓöÇΓöÇ backend/              ΓåÉ Backend (Node.js/Express)
+Γöé   Γö£ΓöÇΓöÇ config/           ΓåÉ DB & email config
+Γöé   Γö£ΓöÇΓöÇ models/           ΓåÉ Mongoose models (User, Studio, Booking)
+Γöé   Γö£ΓöÇΓöÇ controllers/      ΓåÉ Route handlers
+Γöé   Γö£ΓöÇΓöÇ routes/           ΓåÉ Express routers
+Γöé   Γö£ΓöÇΓöÇ middleware/        ΓåÉ Auth, error handler, upload, asyncWrapper
+Γöé   ΓööΓöÇΓöÇ utils/            ΓåÉ AppError, sendEmail
+Γö£ΓöÇΓöÇ uploads/              ΓåÉ Studio image uploads (auto-created)
+Γö£ΓöÇΓöÇ server.js             ΓåÉ Entry point
+Γö£ΓöÇΓöÇ .env                  ΓåÉ Environment variables (DO NOT commit)
+ΓööΓöÇΓöÇ package.json
 ```
 
 ## API Endpoints

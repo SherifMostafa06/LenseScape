@@ -1,7 +1,7 @@
 {
   "name": "lensspace-backend",
   "version": "1.0.0",
-  "description": "LensSpace photoshoot studio reservation platform — backend API",
+  "description": "LensSpace photoshoot studio reservation platform ΓÇö backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -16,6 +16,9 @@
   ],
   "author": "SherifMostafa06",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "connect-mongo": "^6.0.0",
