@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    index.html — Public Home / Studio Browser
+    Visible to ALL visitors without logging in.
+    Clicking "Book Now" checks for an active session:
+      - Not logged in  → redirected to login.html
+      - Logged in      → already redirected to their dashboard on load
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LensSpace — Cairo's one-stop platform to browse and book professional photoshoot studios in Maadi, Zamalek, Nasr City, and New Cairo." />
+  <title>LensSpace — Photoshoot Studio Reservations in Cairo</title>
+
+  <!-- Leaflet.js CSS (Fix 4) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+</head>
+
+<body id="page-home">
+
+  <!-- PUBLIC NAV -->
+  <nav class="public-nav" aria-label="Site navigation">
+    <a href="index.html" class="public-nav-brand">
+      <div class="brand-mark">LS</div>
+      LensSpace
+    </a>
+    <div class="public-nav-links">
+      <a href="index.html" class="active">Browse Studios</a>
+      <a href="about.html">About Us</a>
+    </div>
+    <div class="public-nav-actions">
+      <div class="toggle-wrapper">
+        <span class="dark-mode-label">Dark</span>
+        <button class="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+      </div>
+      <a href="login.html" class="nav-login-btn">Sign In</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <div class="home-hero-content">
+      <div class="home-hero-badge">Cairo's Studio Marketplace</div>
+      <h1>Book Your Perfect<br/>Photoshoot Studio</h1>
+      <p>
+        Browse professional studios across Cairo — natural light spaces, LED rigs,
+        rooftops &amp; more. All in one place, instantly bookable.
+      </p>
+      <div class="home-hero-actions">
+        <a href="login.html" class="btn btn-primary">Get Started — It's Free</a>
+        <a href="about.html" class="btn btn-ghost">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO BROWSING -->
+  <main class="home-main">
+    <div class="home-content">
+
+      <div class="section-header">
+        <div>
+          <h2>Available Studios</h2>
+          <p style="margin:0;">Browse freely — sign in when you're ready to book.</p>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-group" style="flex:1;min-width:200px;">
+          <label for="filter-search">Search</label>
+          <div class="search-bar" style="max-width:100%;">
+            <input type="text" id="filter-search" class="form-input" placeholder="Search by name or feature..." />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label for="filter-zone">Zone</label>
+          <select id="filter-zone" class="form-select" style="min-width:160px;">
+            <option value="all">All Zones</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="studios-grid" class="studio-grid">
+        <div class="empty-state" style="grid-column:1/-1;">
+          <div class="empty-state-lens">LS</div>
+          <h3>Loading studios...</h3>
+        </div>
+      </div>
+
+      <!-- FIX 4: Studio Map -->
+      <div class="map-section">
+        <div class="map-section-header">
+          <h3>Studios on the Map</h3>
+          <div class="map-location-status">
+            <div class="map-location-dot" id="map-location-dot"></div>
+            <span id="map-location-status-text">Detecting your location...</span>
+          </div>
+        </div>
+        <div id="studio-map"></div>
+      </div>
+
+      <!-- ABOUT BRIEF (Fix 3) -->
+      <div class="home-about-brief">
+        <div class="brief-text">
+          <h2>Why LensSpace?</h2>
+          <p>
+            A friend of ours owns a photography studio and has deep connections in Cairo's creative scene.
+            After seeing how fragmented and WhatsApp-dependent the studio booking world was, we built
+            LensSpace — one platform, all of Cairo's top studios, instantly bookable.
+          </p>
+          <a href="about.html" class="btn btn-secondary">Read Our Story</a>
+        </div>
+        <div class="brief-visual">
+          <div class="brief-stat-pill">
+            <span class="pill-number">4</span>
+            <span class="pill-label">Cairo Zones</span>
+          </div>
+          <div class="brief-stat-pill">
+            <span class="pill-number">100%</span>
+            <span class="pill-label">Online</span>
+          </div>
+          <div class="brief-stat-pill">
+            <span class="pill-number">0</span>
+            <span class="pill-label">WhatsApp needed</span>
+          </div>
+          <div class="brief-stat-pill">
+            <span class="pill-number">24/7</span>
+            <span class="pill-label">Browse Anytime</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMER REVIEWS (Fix 3) -->
+      <div class="home-reviews">
+        <h2>What Photographers Say</h2>
+        <p>Real experiences from the LensSpace community.</p>
+        <div class="reviews-grid">
+
+          <div class="review-card">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote">"I used to spend hours on calls just to book a studio slot. With LensSpace I booked Golden Light in under two minutes. The space was exactly as described."</p>
+            <div class="review-author">
+              <div class="review-avatar">NM</div>
+              <div>
+                <span class="review-name">Nada Mostafa</span>
+                <span class="review-zone">Fashion Photographer · Maadi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-quote">"The map feature is genius. I could see which studio was closest to my client, and the 'Nearest to You' badge made the decision easy. Highly recommend."</p>
+            <div class="review-author">
+              <div class="review-avatar">KS</div>
+              <div>
+                <span class="review-name">Karim Salah</span>
+                <span class="review-zone">Commercial Photographer · Zamalek</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+            <p class="review-quote">"Finally a proper booking system for Cairo studios. No more 'check back tomorrow' or double-bookings. The instant confirmation changed my workflow completely."</p>
+            <div class="review-author">
+              <div class="review-avatar">RA</div>
+              <div>
+                <span class="review-name">Rania Ahmed</span>
+                <span class="review-zone">Portrait Photographer · Nasr City</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ANIMATED STATS (Suggestion E) -->
+      <div class="home-stats-section">
+        <h2>LensSpace by the Numbers</h2>
+        <div class="home-stats-grid">
+          <div class="home-stat-item">
+            <span class="home-stat-number" data-count="4" data-suffix="+">4+</span>
+            <span class="home-stat-label">Studios Listed</span>
+          </div>
+          <div class="home-stat-item">
+            <span class="home-stat-number" data-count="4">4</span>
+            <span class="home-stat-label">Cairo Zones</span>
+          </div>
+          <div class="home-stat-item">
+            <span class="home-stat-number" data-count="200" data-suffix="+">200+</span>
+            <span class="home-stat-label">Happy Clients</span>
+          </div>
+          <div class="home-stat-item">
+            <span class="home-stat-number" data-count="500" data-suffix="+">500+</span>
+            <span class="home-stat-label">Bookings Made</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2025 LensSpace &mdash;
+    <a href="about.html">About Us</a> &mdash;
+    <a href="login.html">Sign In</a>
+  </footer>
+
+  <!-- Back to Top (Suggestion F) -->
+  <button id="back-to-top" aria-label="Back to top">&#8679;</button>
+
+  <!-- Leaflet.js -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/home-page.js"></script>
+
+</body>
+</html>

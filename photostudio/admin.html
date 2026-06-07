@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    admin.html — Admin Master Dashboard
+    CHANGES: All emojis removed throughout.
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LensSpace — Admin Dashboard</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+</head>
+
+<body id="page-admin">
+
+  <div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-name">LensSpace</span>
+        <span class="brand-sub">Admin Panel</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Admin navigation">
+        <span class="nav-section-label">Manage All</span>
+        <a href="#users"    class="nav-link active"><span class="nav-icon">&#9632;</span> All Users</a>
+        <a href="#studios"  class="nav-link"><span class="nav-icon">&#9632;</span> All Studios</a>
+        <a href="#bookings" class="nav-link"><span class="nav-icon">&#9776;</span> All Bookings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <strong id="sidebar-user-name">Loading...</strong>
+          <span id="sidebar-user-role">Admin</span>
+        </div>
+        <div class="toggle-wrapper">
+          <span class="dark-mode-label">Dark</span>
+          <button class="dark-mode-toggle" aria-label="Toggle dark mode"></button>
+        </div>
+        <button id="btn-logout" class="btn btn-ghost" style="width:100%; justify-content:flex-start; padding-left:0;">
+          Log Out
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="topbar">
+        <button id="menu-toggle" class="btn btn-ghost btn-sm">Menu</button>
+        <h2 class="topbar-title" id="topbar-title">Admin Dashboard</h2>
+        <div class="topbar-actions">
+          <span style="font-size:0.85rem; color:var(--clr-text-muted);">
+            Welcome, <strong id="topbar-user-name"></strong>
+          </span>
+        </div>
+      </header>
+
+      <main class="page-content">
+
+        <div class="stats-grid" id="stats-grid"></div>
+
+        <!-- All Users -->
+        <section id="users" class="section">
+          <div class="section-header">
+            <div>
+              <h2>All Users</h2>
+              <p style="margin:0;">View and manage all registered accounts.</p>
+            </div>
+            <div class="search-bar">
+              <span class="search-icon">Srch</span>
+              <input type="text" id="search-users" class="form-input" placeholder="Search users..." />
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="All Users">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Registered</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- All Studios -->
+        <section id="studios" class="section">
+          <div class="section-header">
+            <div>
+              <h2>All Studios</h2>
+              <p style="margin:0;">View and remove any studio listing.</p>
+            </div>
+            <div class="search-bar">
+              <span class="search-icon">Srch</span>
+              <input type="text" id="search-studios" class="form-input" placeholder="Search studios..." />
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="All Studios">
+              <thead>
+                <tr>
+                  <th>Studio Name</th>
+                  <th>Owner</th>
+                  <th>Zone</th>
+                  <th>Price / hr</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studios-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- All Bookings -->
+        <section id="bookings" class="section">
+          <div class="section-header">
+            <div>
+              <h2>All Bookings</h2>
+              <p style="margin:0;">Full history of all reservation requests.</p>
+            </div>
+            <div class="search-bar">
+              <span class="search-icon">Srch</span>
+              <input type="text" id="search-bookings" class="form-input" placeholder="Search bookings..." />
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" aria-label="All Bookings">
+              <thead>
+                <tr>
+                  <th>Studio</th>
+                  <th>Client</th>
+                  <th>Date</th>
+                  <th>Hours</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Booked On</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookings-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui-helpers.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/admin-page.js"></script>
+
+</body>
+</html>
