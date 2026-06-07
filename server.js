@@ -1,8 +1,8 @@
-﻿// server.js ΓÇö LensSpace Backend Entry Point
+// server.js ΓÇö LensSpace Backend Entry Point
 require('dotenv').config();
 const express      = require('express');
 const session      = require('express-session');
-const { MongoStore } = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 const cors         = require('cors');
 const path         = require('path');
 const fs           = require('fs');
